@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Banking Application</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==================================================
+         LOGIN PAGE
+    ================================================== -->
+
+    <div class="container" id="loginPage">
+
+        <h1>🏦 Banking Application</h1>
+
+        <div class="card">
+
+            <h2>Login</h2>
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Email"
+            >
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Password"
+            >
+
+            <button onclick="login()">
+                Login
+            </button>
+
+            <p id="loginMessage"></p>
+
+            <hr>
+
+            <p>Don't have an account?</p>
+
+            <button onclick="showRegister()">
+                Create Account
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         REGISTER PAGE
+    ================================================== -->
+
+    <div class="container" id="registerPage" style="display: none;">
+
+        <h1>🏦 Banking Application</h1>
+
+        <div class="card">
+
+            <h2>Create Account</h2>
+
+            <input
+                type="text"
+                id="registerName"
+                placeholder="Full Name"
+            >
+
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="Email"
+            >
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="Password"
+            >
+
+            <input
+                type="number"
+                id="registerPhone"
+                placeholder="Phone Number"
+            >
+
+            <input
+                type="text"
+                id="registerAddress"
+                placeholder="Address"
+            >
+
+            <button onclick="register()">
+                Register
+            </button>
+
+            <p id="registerMessage"></p>
+
+            <button onclick="showLogin()">
+                Back to Login
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         DASHBOARD
+    ================================================== -->
+
+    <div id="dashboardPage" style="display: none;">
+
+        <!-- HEADER -->
+
+        <header class="dashboard-header">
+
+            <h1>🏦 Dashboard</h1>
+
+            <button
+                onclick="logout()"
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </header>
+
+
+        <main class="dashboard">
+
+
+            <!-- ==================================================
+                 ACCOUNT HOLDER INFORMATION
+            ================================================== -->
+
+            <section class="welcome-section">
+
+                <h2>
+                    Welcome, <span id="userName">User</span> 👋
+                </h2>
+            </section>
+
+            <!-- ==================================================
+                 ACCOUNT SUMMARY
+            ================================================== -->
+
+            <section class="account-cards">
+
+
+                <!-- BALANCE -->
+
+                <div class="dashboard-card">
+
+                    <h3>
+                        💰 Current Balance
+                    </h3>
+
+                    <p
+                        class="balance"
+                        id="balance"
+                    >
+                        ₹0.00
+                    </p>
+
+                </div>
+
+
+                <!-- ACCOUNT NUMBER -->
+
+                <div class="dashboard-card">
+
+                    <h3>
+                        🏦 Account Number
+                    </h3>
+
+                    <p id="accountNumber">
+                        -
+                    </p>
+
+                </div>
+
+
+                <!-- ACCOUNT TYPE -->
+
+                <div class="dashboard-card">
+
+                    <h3>
+                        💳 Account Type
+                    </h3>
+
+                    <p id="accountType">
+                        -
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 MONEY TRANSACTIONS
+            ================================================== -->
+
+            <section class="dashboard-card">
+
+                <h2>
+                    💸 Money Transactions
+                </h2>
+
+                <div class="transaction-buttons">
+
+                    <button onclick="showDeposit()">
+                        Deposit Money
+                    </button>
+
+                    <button onclick="showWithdraw()">
+                        Withdraw Money
+                    </button>
+
+                    <button onclick="showTransfer()">
+                        Transfer Money
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 DEPOSIT FORM
+            ================================================== -->
+
+            <section
+                class="dashboard-card transaction-form"
+                id="depositForm"
+                style="display: none;"
+            >
+
+                <h2>
+                    💰 Deposit Money
+                </h2>
+
+                <input
+                    type="number"
+                    id="depositAmount"
+                    placeholder="Enter amount"
+                >
+
+                <button onclick="depositMoney()">
+                    Deposit
+                </button>
+
+                <button onclick="hideForms()">
+                    Cancel
+                </button>
+
+                <p id="depositMessage"></p>
+
+            </section>
+
+
+            <!-- ==================================================
+                 WITHDRAW FORM
+            ================================================== -->
+
+            <section
+                class="dashboard-card transaction-form"
+                id="withdrawForm"
+                style="display: none;"
+            >
+
+                <h2>
+                    💸 Withdraw Money
+                </h2>
+
+                <input
+                    type="number"
+                    id="withdrawAmount"
+                    placeholder="Enter amount"
+                >
+
+                <button onclick="withdrawMoney()">
+                    Withdraw
+                </button>
+
+                <button onclick="hideForms()">
+                    Cancel
+                </button>
+
+                <p id="withdrawMessage"></p>
+
+            </section>
+
+
+            <!-- ==================================================
+                 TRANSFER FORM
+            ================================================== -->
+
+            <section
+                class="dashboard-card transaction-form"
+                id="transferForm"
+                style="display: none;"
+            >
+
+                <h2>
+                    💸 Transfer Money
+                </h2>
+
+                <input
+                    type="number"
+                    id="receiverAccount"
+                    placeholder="Receiver Account Number"
+                >
+
+                <input
+                    type="number"
+                    id="transferAmount"
+                    placeholder="Enter amount"
+                >
+
+                <button onclick="transferMoney()">
+                    Transfer
+                </button>
+
+                <button onclick="hideForms()">
+                    Cancel
+                </button>
+
+                <p id="transferMessage"></p>
+
+            </section>
+
+
+            <!-- ==================================================
+                 TRANSACTION HISTORY
+            ================================================== -->
+
+            <section class="dashboard-card">
+
+                <h2>
+                    📜 Transaction History
+                </h2>
+
+                <button onclick="loadTransactions()">
+                    Refresh Transactions
+                </button>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>ID</th>
+
+                                <th>Type</th>
+
+                                <th>Amount</th>
+
+                                <th>Sender</th>
+
+                                <th>Receiver</th>
+
+                                <th>Time</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="transactionTable">
+
+                            <!-- Transactions will be added by JavaScript -->
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
